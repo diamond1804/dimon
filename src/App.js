@@ -1,27 +1,26 @@
-import React from 'react'
+import MenuLayout from './Layouts/MenuLayout/MenuLayout';
+import {BrowserRouter as Router , Switch,Route} from 'react-router-dom';
+import Home from  './Layouts/Home';
+import WarFirst from  './Layouts/WarFirst';
+import WarSecond from  './Layouts/WarSecond';
+import WarThird from './Layouts/WarThird';
+import WarFourth from './Layouts/WarFourth';
 import './App.css';
-import { Layout } from 'antd';
-import { MenuLayout } from './Layouts/MenuLayout/MenuLayout';
-import { HeaderLayout } from './Layouts/HeaderLayout/HeaderLayout';
-import { ContentLayout } from './Layouts/ContentLayout/ContentLayout';
-import { FooterLayout } from './Layouts/FooterLayout/FooterLayout';
-import 'antd/dist/antd.css';
 
 
 function App() {
   return (
     <>
-        <Layout>
-
-            <MenuLayout />
-            <HeaderLayout />
-
-          <Layout className="site-layout" style={{ marginLeft: 200 }}>
-            <ContentLayout />
-            <FooterLayout />
-
-          </Layout>
-        </Layout>
+        <Router>
+          <MenuLayout />
+             <Switch>
+               <Route path="/" exact component={Home} />
+               <Route path="/warfirst"  component={WarFirst} />
+               <Route path="/warsecond"  component={WarSecond} />
+               <Route path="/warthird"  component={WarThird} />
+               <Route path="/warfourth"  component={WarFourth} />
+             </Switch>
+        </Router>
     </>
   );
 }

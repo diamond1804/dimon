@@ -1,40 +1,50 @@
-import React from 'react'
-import { Layout, Menu } from 'antd'
-import { VideoCameraOutlined,UploadOutlined,BarChartOutlined,CloudOutlined,
-    AppstoreOutlined,TeamOutlined,ShopOutlined,UserOutlined } from "@ant-design/icons"
+import React,{useState} from 'react';
+import * as AiIcons from "react-icons/ai";  
+import * as VscIcons from "react-icons/vsc";
+import { Link } from 'react-router-dom';
+import { SiderPage } from './SiderPage';
+import './Menu.css';
+import { IconContext } from 'react-icons';
 
-const{ Sider } = Layout
-
-export const MenuLayout = () => {
-
+    
+    
+    function MenuLayout() {
+      const [sidebar, setSidebar]= useState(false);
+      const showSidebar = () => setSidebar(!sidebar);
         return (
-            <Sider
-            style={{
-              overflow: 'auto',
-              height: '100vh',
-              position: 'fixed',
-              left: 0,
-            }}
-          >
-            <div className="logo" />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-              <Menu.Item key="1" icon={<UserOutlined />}>
-                nav 1
-              </Menu.Item>
-              <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                nav 2
-              </Menu.Item>
-              <Menu.Item key="3" icon={<UploadOutlined />}>
-                nav 3
-              </Menu.Item>
-              <Menu.Item key="4" icon={<BarChartOutlined />}>
-                nav 4
-              </Menu.Item>
-      
-            </Menu>
-          </Sider>
-        )
-
-}
-
+            <>
+            <IconContext.Provider value={{color:'#fff'}}>
+            <div className='navbar'>
+                <IconContext.Provider value={{className:'open-menu'}}>
+                    <Link to="#" className='menu-bars'>
+                        <VscIcons.VscMenu onClick={showSidebar}/>
+                    </Link>
+                </IconContext.Provider>
+            </div>
+            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+                <ul className='nav-menu-items' onClick={showSidebar}>
+                    <li className='navbar-toggle'>
+                        <Link to="#" className='menu-bars'>
+                            <AiIcons.AiOutlineClose />
+                        </Link>
+                    </li>
+                    {SiderPage.map((item, index) => {
+                        return (
+                            <li key={index} className={item.cName}>
+                                <Link to={item.path}>
+                                    {item.icon}
+                                    <span>
+                                        {item.title}
+                                    </span>
+                                </Link>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </nav>
+            </IconContext.Provider>
+            </>
+        );
+    }
+    
 export default MenuLayout;
