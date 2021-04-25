@@ -20,6 +20,7 @@ import { IconContext } from 'react-icons';
                         <VscIcons.VscMenu onClick={showSidebar}/>
                     </Link>
                 </IconContext.Provider>
+                
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className='nav-menu-items' onClick={showSidebar}>
